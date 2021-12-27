@@ -40,8 +40,6 @@ COPY . /var/www
 
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
-COPY ./init.sh /tmp/init.sh
-RUN ["chmod", "+x", "/tmp/init.sh"]
 
 # Change current user to www
 USER www
@@ -49,5 +47,3 @@ USER www
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
-
-ENTRYPOINT ["/tmp/init.sh"]

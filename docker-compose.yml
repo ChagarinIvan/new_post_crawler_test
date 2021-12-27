@@ -1,44 +1,41 @@
 version: '3'
 services:
-  #PHP Service
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: digitalocean.com/php
-    container_name: new_post_app
-    restart: unless-stopped
-    tty: true
-    volumes:
-       - ./:/var/www
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www
-    networks:
-      - app-network
-
   #MySQL Service
   db:
     image: mysql
-    container_name: new_post_db
-    restart: unless-stopped
-    tty: true
-    volumes:
-        - dbdata:/var/lib/mysq
-        - ./mysql-files:/var/lib/mysql-files
+    container_name: db
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-        MYSQL_ROOT_USER: root
-        MYSQL_ROOT_PASSWORD: laravel
+        MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: laravel
-        MYSQL_USER: root
+        MYSQL_USER: laravel
         MYSQL_PASSWORD: laravel
-        SERVICE_TAGS: dev
-        SERVICE_NAME: mysql
+        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - dbdata:/var/lib/mysq
+      - ./mysql-files:/var/lib/mysql-files
     ports:
       - "3306:3306"
     networks:
       - app-network
+
+  #PHP Service
+  app:
+      build:
+          context: .
+          dockerfile: Dockerfile
+      image: digitalocean.com/php
+      container_name: app
+      restart: unless-stopped
+      tty: true
+      volumes:
+          - ./:/var/www
+      environment:
+          SERVICE_NAME: app
+          SERVICE_TAGS: dev
+      working_dir: /var/www
+      networks:
+          - app-network
 
     #Nginx Service
   webserver:
