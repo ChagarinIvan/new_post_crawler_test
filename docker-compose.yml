@@ -1,0 +1,49 @@
+version: '3'
+services:
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: new_post_app
+    restart: unless-stopped
+    tty: true
+    volumes:
+       - ./:/var/www
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql
+    container_name: new_post_db
+    restart: unless-stopped
+    tty: true
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+        - ./docker/provision/mysql/init:/docker-entrypoint-initdb.d
+        - dbdata:/var/lib/mysq
+        - ./mysql-files:/var/lib/mysql-files
+    environment:
+        MYSQL_ROOT_PASSWORD: local
+        SERVICE_TAGS: dev
+        SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
