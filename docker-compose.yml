@@ -24,19 +24,35 @@ services:
     container_name: new_post_db
     restart: unless-stopped
     tty: true
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-        - ./docker/provision/mysql/init:/docker-entrypoint-initdb.d
         - dbdata:/var/lib/mysq
         - ./mysql-files:/var/lib/mysql-files
     environment:
-        MYSQL_ROOT_PASSWORD: local
+        MYSQL_ROOT_USER: root
+        MYSQL_ROOT_PASSWORD: laravel
+        MYSQL_DATABASE: laravel
+        MYSQL_USER: root
+        MYSQL_PASSWORD: laravel
         SERVICE_TAGS: dev
         SERVICE_NAME: mysql
     ports:
       - "3306:3306"
     networks:
       - app-network
+
+    #Nginx Service
+  webserver:
+      image: nginx:alpine
+      container_name: webserver
+      restart: unless-stopped
+      tty: true
+      volumes:
+          - ./:/var/www
+          - ./nginx/conf.d/:/etc/nginx/conf.d/
+      ports:
+          - "80:80"
+      networks:
+          - app-network
 
 #Docker Networks
 networks:
