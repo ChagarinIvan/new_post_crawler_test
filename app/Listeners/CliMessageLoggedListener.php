@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Console;
+namespace App\Listeners;
 
 use Illuminate\Log\Events\MessageLogged;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use function app;
 
 class CliMessageLoggedListener
 {

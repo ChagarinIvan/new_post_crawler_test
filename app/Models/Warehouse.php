@@ -33,9 +33,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $total_max_weight_allowed
  * @property int $place_max_weight_allowed
  * @property array $sending_limitations_on_dimensions
- * @property string $width
- * @property string $height
- * @property string $length
  * @property string $district_code
  * @property string $warehouse_status
  * @property string $warehouse_status_date

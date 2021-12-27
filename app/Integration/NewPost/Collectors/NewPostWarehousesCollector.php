@@ -120,9 +120,6 @@ class NewPostWarehousesCollector implements CollectorInterface
             $warehouse->total_max_weight_allowed = (int)$warehouseData['TotalMaxWeightAllowed'] ?? 0;
             $warehouse->place_max_weight_allowed = (int)$warehouseData['PlaceMaxWeightAllowed'] ?? 0;
             $warehouse->sending_limitations_on_dimensions = (array)$warehouseData['SendingLimitationsOnDimensions'] ?? [];
-            $warehouse->width = $warehouseData['Width'] ?? '';
-            $warehouse->height = $warehouseData['Height'] ?? '';
-            $warehouse->length = $warehouseData['Length'] ?? '';
             $warehouse->district_code = $warehouseData['DistrictCode'] ?? '';
             $warehouse->warehouse_status = $warehouseData['WarehouseStatus'] ?? '';
             $warehouse->warehouse_status_date = $warehouseData['WarehouseStatusDate'] ?? '';

@@ -32,9 +32,6 @@ class AddWarehousesTable extends Migration
             $table->string('settlement_type_description_ru');
             $table->string('bicycle_parking');
             $table->string('payment_access');
-            $table->string('width');
-            $table->string('height');
-            $table->string('length');
             $table->string('category_of_warehouse');
             $table->string('warehouse_status');
             $table->string('warehouse_status_date');

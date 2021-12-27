@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Console\CliMessageLoggedListener;
+use App\Listeners\CliMessageLoggedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

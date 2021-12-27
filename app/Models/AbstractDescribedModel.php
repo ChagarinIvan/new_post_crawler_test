@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,7 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class AbstractDescribedModel extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
+    public $incrementing = false;
 
     protected $primaryKey = 'ref';
     protected $keyType = 'string';
