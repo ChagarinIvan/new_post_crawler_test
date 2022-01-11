@@ -11,5 +11,3 @@
 10. localhost/api/area/{area_ref} - подробно область со списком городов
 11. localhost/api/city/{city_ref} - подробно город со списком отделений
 12. localhost/api/warehouse/{warehouse_ref} - подробно отделение
-
-рабочий пример тут http://3.65.64.158/api/area/7150812d-9b87-11de-822f-000c2965ae0e
